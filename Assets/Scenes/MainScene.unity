@@ -120,7 +120,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -536, y: 231}
+  m_AnchoredPosition: {x: -441, y: 189}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &456757354
@@ -414,6 +414,7 @@ GameObject:
   - 92: {fileID: 1302638711}
   - 124: {fileID: 1302638710}
   - 81: {fileID: 1302638709}
+  - 114: {fileID: 1302638714}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -485,7 +486,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
+--- !u!114 &1302638714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1302638708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a87279ee370004b9df98c0cbc48deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LineMaterial: {fileID: 2100000, guid: 06a7aea3296e780498cefc823f0e5e2f, type: 2}
 --- !u!1 &1462993073
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,7 +599,7 @@ GameObject:
   - 4: {fileID: 1530751888}
   - 114: {fileID: 1530751887}
   m_Layer: 0
-  m_Name: SplineOperator
+  m_Name: SplineManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -615,7 +628,7 @@ Transform:
   m_LocalScale: {x: .25, y: .25, z: .25}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
 --- !u!1001 &1653120344
 Prefab:
   m_ObjectHideFlags: 0
@@ -625,11 +638,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 438466, guid: c1f95677b52e3634086eafc29414384c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.62426984
+      value: -1.04999995
       objectReference: {fileID: 0}
     - target: {fileID: 438466, guid: c1f95677b52e3634086eafc29414384c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.12981331
+      value: -1.80999994
       objectReference: {fileID: 0}
     - target: {fileID: 438466, guid: c1f95677b52e3634086eafc29414384c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -653,7 +666,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 438466, guid: c1f95677b52e3634086eafc29414384c, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1f95677b52e3634086eafc29414384c, type: 2}

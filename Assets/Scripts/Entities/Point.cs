@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Behaviours;
 using Assets.Scripts.Interfaces;
+using Assets.Scripts.Operators;
 using UnityEngine;
 
 namespace Assets.Scripts.Entities
@@ -8,7 +9,7 @@ namespace Assets.Scripts.Entities
     {
         private SelectMaterials _selectMaterials;
 
-        private void Start()
+        private void Awake()
         {
             _selectMaterials = GetComponent<SelectMaterials>();
 
@@ -56,5 +57,13 @@ namespace Assets.Scripts.Entities
 
             Selector.SelectedPoint = this;
         }
+
+        public float Tension;
+
+        public float Bias;
+
+        public float Continuity;
+
+        public Vector3 Position { get { return transform.position; } }
     }
 }

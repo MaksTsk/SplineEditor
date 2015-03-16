@@ -89,7 +89,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1400001, y: -.289999992, z: 0}
+  m_LocalPosition: {x: -.730000019, y: -1.80999994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 447934}
@@ -104,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6400001, y: -.0600000024, z: 0}
+  m_LocalPosition: {x: 3.29999995, y: -.0299999993, z: 0}
   m_LocalScale: {x: .25, y: .25, z: .25}
   m_Children: []
   m_Father: {fileID: 438466}
@@ -116,7 +116,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5774138, y: 3.04426098, z: 0}
+  m_LocalPosition: {x: .610000014, y: 0, z: 0}
   m_LocalScale: {x: .25, y: .25, z: .25}
   m_Children: []
   m_Father: {fileID: 438466}
@@ -128,7 +128,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 152766}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.369999886, y: -.0600000024, z: 0}
+  m_LocalPosition: {x: 2, y: 4.11999989, z: 0}
   m_LocalScale: {x: .25, y: .25, z: .25}
   m_Children: []
   m_Father: {fileID: 438466}
@@ -273,6 +273,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a670f1ccd14a440a16d6959af75a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Tension: 0
+  Bias: 0
+  Continuity: 0
 --- !u!114 &11422938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -334,6 +337,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a670f1ccd14a440a16d6959af75a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Tension: 0
+  Bias: 0
+  Continuity: 0
 --- !u!114 &11471248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -345,7 +351,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c38b880f2c32c47b61e9bcdb06b0bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SplinePoints: []
+  KeyPoints:
+  - {fileID: 11492338}
+  - {fileID: 11412048}
+  - {fileID: 11451172}
+  IsClosedSpline: 0
+  MaxVerticesCurve: 5
+  DrawSourceLine: 0
 --- !u!114 &11472598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -382,6 +394,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a670f1ccd14a440a16d6959af75a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Tension: 0
+  Bias: 0
+  Continuity: 0
 --- !u!135 &13522412
 SphereCollider:
   m_ObjectHideFlags: 1

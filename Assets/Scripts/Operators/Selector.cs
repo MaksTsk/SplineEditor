@@ -1,7 +1,6 @@
 ﻿using Assets.Scripts.Entities;
-using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Operators
 {
     public static class Selector
     {
