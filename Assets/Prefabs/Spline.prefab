@@ -75,6 +75,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 487436}
   - 114: {fileID: 11445094}
+  - 114: {fileID: 11436504}
   m_Layer: 0
   m_Name: Spline
   m_TagString: Untagged
@@ -287,6 +288,18 @@ MonoBehaviour:
   InActiveMaterial: {fileID: 2100000, guid: a44804f2cf66c544faa93ad7509d73c3, type: 2}
   ActiveMaterial: {fileID: 2100000, guid: 030194085ccf6d1409e0a3a34a5ff890, type: 2}
   FocuseMaterial: {fileID: 2100000, guid: 06a7aea3296e780498cefc823f0e5e2f, type: 2}
+--- !u!114 &11436504
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eada67bc6cdce5e4c95007050f8757ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PointPrefab: {fileID: 11468186, guid: 43f0e9293b7dad341aec537dd47581f9, type: 2}
 --- !u!114 &11436524
 MonoBehaviour:
   m_ObjectHideFlags: 1

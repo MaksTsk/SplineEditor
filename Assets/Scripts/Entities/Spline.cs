@@ -18,6 +18,13 @@ namespace Assets.Scripts.Entities
 
         public List<Vector3> SplinePoints { get; private set; }
 
+        private SplineCalculator _splineCalculator;
+
+        private void Awake()
+        {
+            _splineCalculator = GetComponent<SplineCalculator>();
+        }
+
         // Use this for initialization
         private void Start()
         {
@@ -31,7 +38,17 @@ namespace Assets.Scripts.Entities
         // Update is called once per frame
         private void Update()
         {
-            SplinePoints = SplineCalculator.GetSplinePoints(KeyPoints, IsClosedSpline, MaxVerticesCurve);
+            SplinePoints = _splineCalculator.GetSplinePoints();
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                var point = _splineCalculator.GetPointFromClick();
+
+                if (point != null)
+                {
+                    KeyPoints.Add(point);
+                }
+            }
         }
 
         public void Select()
