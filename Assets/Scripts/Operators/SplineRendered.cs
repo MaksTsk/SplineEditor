@@ -55,8 +55,8 @@ namespace Assets.Scripts.Operators
                     }
                 }
                 GL.Color(spline.IsSelected ? ActiveSplineColor : InActiveSplineColor);
-                Debug.Log("Points count: " + spline.SplinePoints.Count);
-                for (int i = 0; i < spline.SplinePoints.Count - 1; i++)
+
+                for (var i = 0; i < spline.SplinePoints.Count - 1; i++)
                 {
                     DrawLine(spline.SplinePoints[i], spline.SplinePoints[i + 1]);
                 }
