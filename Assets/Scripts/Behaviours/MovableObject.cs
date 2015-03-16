@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Entities;
+using Assets.Scripts.Interfaces;
+using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Behaviours
 {
     [RequireComponent(typeof(MeshCollider))]
     public class MovableObject : MonoBehaviour {
@@ -24,6 +26,13 @@ namespace Assets.Scripts
             var curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + _offset;
 
             transform.position = curPosition;
+
+            var selectObject = GetComponent<ISelectableObject>();
+
+            if (selectObject != null)
+            {
+                selectObject.Select();
+            }
         }
     }
 }

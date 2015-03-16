@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.Behaviours
 {
-    public class SelectableObject : MonoBehaviour {
+    public class SelectMaterials : MonoBehaviour {
 
         public Material InActiveMaterial;
 

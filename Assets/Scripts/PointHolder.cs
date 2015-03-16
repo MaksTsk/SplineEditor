@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Entities;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
     public class PointHolder : MonoBehaviour {
 
-        public GameObject PointObject;
+        public GameObject SplineObject;
 
         // Use this for initialization
         void Start () {
@@ -16,9 +17,13 @@ namespace Assets.Scripts
 	
         }
 
-        public void CreatePoint()
+        public void CreateSpline()
         {
-            Instantiate(PointObject, new Vector3(0, 0, 0), Quaternion.identity);
+            Instantiate(SplineObject, new Vector3(0, 0, 0), Quaternion.identity);
         }
+
+        public static Point SelectedPoint { get; set; }
+
+        public static Spline SelectedSpline { get; set; }
     }
 }
