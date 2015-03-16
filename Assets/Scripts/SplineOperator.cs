@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class PointHolder : MonoBehaviour {
+    public class SplineOperator : MonoBehaviour {
 
         public GameObject SplineObject;
 
@@ -21,9 +21,5 @@ namespace Assets.Scripts
         {
             Instantiate(SplineObject, new Vector3(0, 0, 0), Quaternion.identity);
         }
-
-        public static Point SelectedPoint { get; set; }
-
-        public static Spline SelectedSpline { get; set; }
     }
 }

@@ -40,7 +40,7 @@ namespace Assets.Scripts.Entities
 
         public bool IsSelected
         {
-            get { return ReferenceEquals(PointHolder.SelectedPoint, this); }
+            get { return ReferenceEquals(Selector.SelectedPoint, this); }
         }
 
         public void Select()
@@ -54,7 +54,7 @@ namespace Assets.Scripts.Entities
                 parentObject.Select();
             }
 
-            PointHolder.SelectedPoint = this;
+            Selector.SelectedPoint = this;
         }
     }
 }

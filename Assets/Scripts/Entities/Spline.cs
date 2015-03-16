@@ -24,9 +24,9 @@ namespace Assets.Scripts.Entities
         {
             Debug.Log("Spline select");
 
-            PointHolder.SelectedSpline = this;
+            Selector.SelectedSpline = this;
         }
 
-        public bool IsSelected { get { return ReferenceEquals(PointHolder.SelectedSpline, this); } }
+        public bool IsSelected { get { return ReferenceEquals(Selector.SelectedSpline, this); } }
     }
 }
