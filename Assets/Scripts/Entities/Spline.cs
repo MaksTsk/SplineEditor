@@ -40,7 +40,7 @@ namespace Assets.Scripts.Entities
         {
             SplinePoints = _splineCalculator.GetSplinePoints();
 
-            if (Input.GetMouseButtonDown(1))
+            if (IsSelected && Input.GetMouseButtonDown(1))
             {
                 var point = _splineCalculator.GetPointFromClick();
 
