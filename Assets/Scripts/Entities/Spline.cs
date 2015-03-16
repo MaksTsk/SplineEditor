@@ -11,7 +11,7 @@ namespace Assets.Scripts.Entities
 
         public bool IsClosedSpline;
 
-        public int MaxVerticesCurve =5;
+        public int MaxVerticesCurve =10;
 
         public bool DrawSourceLine;
 
