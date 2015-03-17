@@ -346,6 +346,7 @@ MonoBehaviour:
   IsClosedSpline: 1
   MaxVerticesCurve: 50
   DrawSourceLine: 1
+  PointPrefab: {fileID: 107936, guid: 43f0e9293b7dad341aec537dd47581f9, type: 2}
 --- !u!114 &11483838
 MonoBehaviour:
   m_ObjectHideFlags: 1

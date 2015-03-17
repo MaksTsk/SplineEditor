@@ -2,11 +2,12 @@
 using Assets.Scripts.Controllers;
 using Assets.Scripts.Entities;
 using Assets.Scripts.Extensions;
+using Assets.Scripts.Interfaces;
 using UnityEngine;
 
 namespace Assets.Scripts.Math
 {
-    public  class SplineCalculator : MonoBehaviour
+    public  class SplineCalculator : MonoBehaviour, ISplineCalculator
     {
         public Point PointPrefab;
 
@@ -81,12 +82,11 @@ namespace Assets.Scripts.Math
                 p2 * (-2.0f * t * t * t + 3.0f * t * t) + r2 * (t * t * t - t * t);
         }
 
-        public Point GetPointFromClick()
+        public Vector3 GetPointLocationFromClick()
         {
-            var C = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
-            var minI = 0;
+            var mouseLocation = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
             var minD = Vector3.zero;
-            var flag = true;
+            var hasCalculationError = true;
             var minDistance = float.MaxValue;
             for (var i = 0; i < _spline.KeyPoints.Count - 1; i++)
             {
@@ -94,19 +94,18 @@ namespace Assets.Scripts.Math
                 var A = CameraController.MainCamera.WorldToScreenPoint(_spline.KeyPoints[i].Position);
                 var B = CameraController.MainCamera.WorldToScreenPoint(_spline.KeyPoints[i + 1].Position);
 
-                var D = A + Vector3.Project(C - A, B - A);
+                var D = A + Vector3.Project(mouseLocation - A, B - A);
                 var Va = D - A;
                 var Vb = D - B;
 
                 if ((Mathf.Sign(Va.x) != Mathf.Sign(Vb.x) || Va.x == 0 && Vb.x == 0) &&
                     (Mathf.Sign(Va.y) != Mathf.Sign(Vb.y) || Va.y == 0 && Vb.y == 0) &&
                     (Mathf.Sign(Va.z) != Mathf.Sign(Vb.z) || Va.z == 0 && Vb.z == 0) &&
-                    Vector3.Distance(D, C) < minDistance)
+                    Vector3.Distance(D, mouseLocation) < minDistance)
                 {
-                    minI = i;
                     minD = D;
-                    minDistance = Vector3.Distance(D, C);
-                    flag = false;
+                    minDistance = Vector3.Distance(D, mouseLocation);
+                    hasCalculationError = false;
                 }
             }
 
@@ -116,33 +115,27 @@ namespace Assets.Scripts.Math
                 var B =
                     CameraController.MainCamera.WorldToScreenPoint(_spline.KeyPoints[_spline.KeyPoints.Count - 1].Position);
 
-                var D = A + Vector3.Project(C - A, B - A);
+                var D = A + Vector3.Project(mouseLocation - A, B - A);
                 var Va = D - A;
                 var Vb = D - B;
 
                 if ((Mathf.Sign(Va.x) != Mathf.Sign(Vb.x) || Va.x == 0 && Vb.x == 0) &&
                     (Mathf.Sign(Va.y) != Mathf.Sign(Vb.y) || Va.y == 0 && Vb.y == 0) &&
                     (Mathf.Sign(Va.z) != Mathf.Sign(Vb.z) || Va.z == 0 && Vb.z == 0) &&
-                    Vector3.Distance(D, C) < minDistance)
+                    Vector3.Distance(D, mouseLocation) < minDistance)
                 {
-                    minI = _spline.KeyPoints.Count - 1;
                     minD = D;
-                    minDistance = Vector3.Distance(D, C);
-                    flag = false;
+                    Vector3.Distance(D, mouseLocation);
+                    hasCalculationError = false;
                 }
             }
 
-            if (flag)
+            if (hasCalculationError)
             {
-                return null;
+                return Vector3.zero;
             }
 
-            var point = Instantiate(PointPrefab);
-            point.transform.parent = transform;
-            var curentPos = CameraController.MainCamera.ScreenToWorldPoint(minD);
-            point.transform.position = curentPos;
-
-            return point;
+            return minD;
         }
     }
 }

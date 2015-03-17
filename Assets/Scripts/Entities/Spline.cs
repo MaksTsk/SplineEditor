@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.Controllers;
 using Assets.Scripts.Extensions;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Math;
@@ -19,13 +20,14 @@ namespace Assets.Scripts.Entities
 
         public bool DrawSourceLine = true;
 
+        public GameObject PointPrefab;
         public List<Vector3> SplinePoints { get; private set; }
 
-        private SplineCalculator _splineCalculator;
+        private ISplineCalculator _splineCalculator;
 
         private void Awake()
         {
-            _splineCalculator = this.GetComponentEx<SplineCalculator>();
+            _splineCalculator = this.GetComponentEx<ISplineCalculator>();
         }
 
         // Use this for initialization
@@ -55,13 +57,22 @@ namespace Assets.Scripts.Entities
 
             if (IsSelected && Input.GetMouseButtonDown(1))
             {
-                var point = _splineCalculator.GetPointFromClick();
+                var pointLocation = _splineCalculator.GetPointLocationFromClick();
 
-                if (point != null)
+                if (pointLocation != Vector3.zero)
                 {
-                    KeyPoints.Add(point);
+                    CreatePointByLocation(pointLocation);
                 }
             }
+        }
+
+        private void CreatePointByLocation(Vector3 pointLocation)
+        {
+            var point = Instantiate(PointPrefab);
+            point.transform.parent = transform;
+            var curentPos = CameraController.MainCamera.ScreenToWorldPoint(pointLocation);
+            point.transform.position = curentPos;
+            KeyPoints.Add(point.GetComponent<Point>());
         }
 
         public void Select()

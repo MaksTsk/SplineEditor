@@ -1189,26 +1189,17 @@ RectTransform:
   m_PrefabParentObject: {fileID: 22466222, guid: 0875c20d474bd3b45a26f6433eef2829,
     type: 2}
   m_PrefabInternal: {fileID: 538880377}
---- !u!1 &541259874
-GameObject:
-  m_PrefabParentObject: {fileID: 140178, guid: 5be97bc7994234140bb66155ff0fbde4, type: 2}
-  m_PrefabInternal: {fileID: 217716299}
 --- !u!224 &541259875
 RectTransform:
   m_PrefabParentObject: {fileID: 22439972, guid: 5be97bc7994234140bb66155ff0fbde4,
     type: 2}
   m_PrefabInternal: {fileID: 217716299}
---- !u!114 &541259878
+--- !u!114 &541259876
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 541259874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1df380a33d69634999afb3c84e7fe85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_PrefabParentObject: {fileID: 11497032, guid: 5be97bc7994234140bb66155ff0fbde4,
+    type: 2}
+  m_PrefabInternal: {fileID: 217716299}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &553643081
 Prefab:
   m_ObjectHideFlags: 0
@@ -1399,6 +1390,7 @@ GameObject:
   - 114: {fileID: 592869153}
   - 114: {fileID: 592869152}
   - 114: {fileID: 592869156}
+  - 114: {fileID: 592869157}
   m_Layer: 5
   m_Name: SplineManager
   m_TagString: Untagged
@@ -1492,6 +1484,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PointPrefab: {fileID: 107936, guid: 43f0e9293b7dad341aec537dd47581f9, type: 2}
   SplinePrefab: {fileID: 133748, guid: c1f95677b52e3634086eafc29414384c, type: 2}
+--- !u!114 &592869157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 592869150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1df380a33d69634999afb3c84e7fe85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StatusInput: {fileID: 541259876}
 --- !u!1001 &649755821
 Prefab:
   m_ObjectHideFlags: 0
