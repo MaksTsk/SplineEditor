@@ -67,7 +67,7 @@ namespace Assets.Scripts.Entities
 
         public bool IsSelected
         {
-            get { return ReferenceEquals(Selector.SelectedPoint, this); }
+            get { return ReferenceEquals(SelectionManager.SelectedPoint, this); }
         }
 
         public void Select()
@@ -79,7 +79,7 @@ namespace Assets.Scripts.Entities
                 parentObject.Select();
             }
 
-            Selector.SelectedPoint = this;
+            SelectionManager.SelectedPoint = this;
         }
 
         #endregion

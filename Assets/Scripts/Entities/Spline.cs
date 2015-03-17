@@ -28,18 +28,22 @@ namespace Assets.Scripts.Entities
         // Use this for initialization
         private void Start()
         {
-            Selector.SelectedSpline = this;
+            SelectionManager.SelectedSpline = this;
 
-            if (KeyPoints.Count > 0)
-            {
-                Selector.SelectedPoint = KeyPoints[0];
-            }
+            SelectFirstKeyPoint();
 
             SplineHolder.Splines.Add(this);
 
             SplinePoints = new List<Vector3>();
         }
 
+        public void SelectFirstKeyPoint()
+        {
+            if (KeyPoints.Count > 0)
+            {
+                SelectionManager.SelectedPoint = KeyPoints[0];
+            }
+        }
 
         // Update is called once per frame
         private void Update()
@@ -59,10 +63,10 @@ namespace Assets.Scripts.Entities
 
         public void Select()
         {
-            Selector.SelectedSpline = this;
+            SelectionManager.SelectedSpline = this;
         }
 
-        public bool IsSelected { get { return ReferenceEquals(Selector.SelectedSpline, this); } }
+        public bool IsSelected { get { return ReferenceEquals(SelectionManager.SelectedSpline, this); } }
 
         public string Title { get; set; }
 

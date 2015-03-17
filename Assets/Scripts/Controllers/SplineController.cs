@@ -29,35 +29,35 @@ namespace Assets.Scripts.Controllers
         // Update is called once per frame
         private void Update()
         {
-            if (Selector.SelectedSpline != null)
+            if (SelectionManager.SelectedSpline != null)
             {
-                _maxCurveSlider.value = Selector.SelectedSpline.MaxVerticesCurve;
-                _isClosedSplineToggle.isOn = Selector.SelectedSpline.IsClosedSpline;
-                _showSourceLineToggle.isOn = Selector.SelectedSpline.DrawSourceLine;
+                _maxCurveSlider.value = SelectionManager.SelectedSpline.MaxVerticesCurve;
+                _isClosedSplineToggle.isOn = SelectionManager.SelectedSpline.IsClosedSpline;
+                _showSourceLineToggle.isOn = SelectionManager.SelectedSpline.DrawSourceLine;
             }
         }
 
         public void OnMaxCurveValueChanged()
         {
-            if (Selector.SelectedSpline != null)
+            if (SelectionManager.SelectedSpline != null)
             {
-                Selector.SelectedSpline.MaxVerticesCurve = (int)_maxCurveSlider.value;
+                SelectionManager.SelectedSpline.MaxVerticesCurve = (int)_maxCurveSlider.value;
             }
         }
 
         public void OnClosedToggleChanged()
         {
-            if (Selector.SelectedSpline != null)
+            if (SelectionManager.SelectedSpline != null)
             {
-                Selector.SelectedSpline.IsClosedSpline = _isClosedSplineToggle.isOn;
+                SelectionManager.SelectedSpline.IsClosedSpline = _isClosedSplineToggle.isOn;
             }
         }
 
         public void OnShowSourceLineToggleChanged()
         {
-            if (Selector.SelectedSpline != null)
+            if (SelectionManager.SelectedSpline != null)
             {
-                Selector.SelectedSpline.DrawSourceLine = _showSourceLineToggle.isOn;
+                SelectionManager.SelectedSpline.DrawSourceLine = _showSourceLineToggle.isOn;
             }
         }
     }

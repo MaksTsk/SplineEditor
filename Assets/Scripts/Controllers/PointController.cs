@@ -27,45 +27,45 @@ namespace Assets.Scripts.Controllers
         // Update is called once per frame
         private void Update()
         {
-            if (Selector.SelectedPoint != null)
+            if (SelectionManager.SelectedPoint != null)
             {
-                _tensionSlider.value = Selector.SelectedPoint.Tension;
+                _tensionSlider.value = SelectionManager.SelectedPoint.Tension;
 
-                _biasSlider.value = Selector.SelectedPoint.Bias;
+                _biasSlider.value = SelectionManager.SelectedPoint.Bias;
 
-                _continuitySlider.value = Selector.SelectedPoint.Continuity;
+                _continuitySlider.value = SelectionManager.SelectedPoint.Continuity;
             }
         }
 
         public void OnTensionChanged()
         {
-            if (Selector.SelectedPoint != null)
+            if (SelectionManager.SelectedPoint != null)
             {
-                Selector.SelectedPoint.Tension = _tensionSlider.value;
+                SelectionManager.SelectedPoint.Tension = _tensionSlider.value;
             }
         }
 
         public void OnBiasChanged()
         {
-            if (Selector.SelectedPoint != null)
+            if (SelectionManager.SelectedPoint != null)
             {
-                Selector.SelectedPoint.Bias = _biasSlider.value;
+                SelectionManager.SelectedPoint.Bias = _biasSlider.value;
             }
         }
 
         public void OnContinuityChanged()
         {
-            if (Selector.SelectedPoint != null)
+            if (SelectionManager.SelectedPoint != null)
             {
-                Selector.SelectedPoint.Continuity = _continuitySlider.value;
+                SelectionManager.SelectedPoint.Continuity = _continuitySlider.value;
             }
         }
 
         public void OnResetClicked()
         {
-            if (Selector.SelectedPoint != null)
+            if (SelectionManager.SelectedPoint != null)
             {
-                Selector.SelectedPoint.RestoreDefaultProperties();
+                SelectionManager.SelectedPoint.RestoreDefaultProperties();
             }
         }
     }

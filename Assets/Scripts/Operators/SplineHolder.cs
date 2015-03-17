@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts.Entities;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 namespace Assets.Scripts.Operators
 {
     public class SplineHolder : MonoBehaviour
     {
+        private static List<Spline> _splines;
+
         public static List<Spline> Splines
         {
             get
@@ -19,27 +20,6 @@ namespace Assets.Scripts.Operators
             }
 
             set { _splines = value; }
-        }
-
-        public GameObject SplineObject;
-
-        private static List<Spline> _splines;
-
-        // Use this for initialization
-        private void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        private void Update()
-        {
-
-        }
-
-        public void CreateSpline()
-        {
-            Instantiate(SplineObject, new Vector3(0, 0, 0), Quaternion.identity);
         }
     }
 }

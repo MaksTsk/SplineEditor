@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.Operators
 {
-    public static class Selector
+    public static class SelectionManager
     {
         public static Point SelectedPoint { get; set; }
 
