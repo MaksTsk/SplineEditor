@@ -343,9 +343,9 @@ MonoBehaviour:
   - {fileID: 11444616}
   - {fileID: 11484772}
   - {fileID: 11483946}
-  IsClosedSpline: 0
-  MaxVerticesCurve: 10
-  DrawSourceLine: 0
+  IsClosedSpline: 1
+  MaxVerticesCurve: 50
+  DrawSourceLine: 1
 --- !u!114 &11483838
 MonoBehaviour:
   m_ObjectHideFlags: 1
