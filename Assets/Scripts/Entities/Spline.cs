@@ -8,6 +8,8 @@ namespace Assets.Scripts.Entities
 {
     public class Spline : MonoBehaviour, ISelectableObject
     {
+        public const int DefaultPointsCount = 3;
+
         public List<Point> KeyPoints;
 
         public bool IsClosedSpline = true;
@@ -67,8 +69,6 @@ namespace Assets.Scripts.Entities
         }
 
         public bool IsSelected { get { return ReferenceEquals(SelectionManager.SelectedSpline, this); } }
-
-        public string Title { get; set; }
 
     }
 }

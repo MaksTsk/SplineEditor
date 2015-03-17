@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.Extensions;
 using Assets.Scripts.Operators;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +7,6 @@ namespace Assets.Scripts.Controllers
 {
     public class SplineController : MonoBehaviour
     {
-
         private Slider _maxCurveSlider;
 
         private Toggle _isClosedSplineToggle;

@@ -335,7 +335,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 487436, guid: c1f95677b52e3634086eafc29414384c, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11445094, guid: c1f95677b52e3634086eafc29414384c, type: 2}
       propertyPath: IsClosedSpline
@@ -1128,6 +1128,7 @@ GameObject:
   - 114: {fileID: 592869154}
   - 114: {fileID: 592869153}
   - 114: {fileID: 592869152}
+  - 114: {fileID: 592869156}
   m_Layer: 5
   m_Name: SplineManager
   m_TagString: Untagged
@@ -1168,6 +1169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SplineObject: {fileID: 133748, guid: c1f95677b52e3634086eafc29414384c, type: 2}
+  PointPrefab: {fileID: 0}
 --- !u!114 &592869153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1206,6 +1208,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 592869150}
+--- !u!114 &592869156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 592869150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f697ff7bc751a4fa07aa0d7285fe67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &649755821
 Prefab:
   m_ObjectHideFlags: 0
@@ -1512,6 +1525,10 @@ Prefab:
     - target: {fileID: 11449390, guid: c888059e17ccaa742a95b82ade125ea8, type: 2}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449390, guid: c888059e17ccaa742a95b82ade125ea8, type: 2}
+      propertyPath: m_WholeNumbers
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c888059e17ccaa742a95b82ade125ea8, type: 2}

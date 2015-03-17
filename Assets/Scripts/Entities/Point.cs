@@ -89,6 +89,7 @@ namespace Assets.Scripts.Entities
         public Vector3 Position
         {
             get { return transform.position; }
+            set { transform.position = value; }
         }
 
         #endregion
