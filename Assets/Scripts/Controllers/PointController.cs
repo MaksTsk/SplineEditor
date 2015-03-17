@@ -60,5 +60,13 @@ namespace Assets.Scripts.Controllers
                 Selector.SelectedPoint.Continuity = _continuitySlider.value;
             }
         }
+
+        public void OnResetClicked()
+        {
+            if (Selector.SelectedPoint != null)
+            {
+                Selector.SelectedPoint.RestoreDefaultProperties();
+            }
+        }
     }
 }

@@ -7,7 +7,29 @@ namespace Assets.Scripts.Entities
 {
     public class Point : MonoBehaviour, ISelectableObject
     {
+        #region - Constants -
+
+        public const float DefaultTensionValue = 0;
+
+        public const float DefauleBiasValue = 0;
+
+        public const float DefaultContinuityValue = 0;
+
+        #endregion
+
+        #region - Fields -
+
         private SelectMaterials _selectMaterials;
+
+        public float Tension = DefaultTensionValue;
+
+        public float Bias = DefauleBiasValue;
+
+        public float Continuity = DefaultContinuityValue;
+
+        #endregion
+
+        #region - Event Handlers -
 
         private void Awake()
         {
@@ -39,6 +61,10 @@ namespace Assets.Scripts.Entities
 
         }
 
+        #endregion
+
+        #region - ISelectable Object Members -
+
         public bool IsSelected
         {
             get { return ReferenceEquals(Selector.SelectedPoint, this); }
@@ -56,12 +82,31 @@ namespace Assets.Scripts.Entities
             Selector.SelectedPoint = this;
         }
 
-        public float Tension;
+        #endregion
 
-        public float Bias;
+        #region - Properties -
 
-        public float Continuity;
+        public Vector3 Position
+        {
+            get { return transform.position; }
+        }
 
-        public Vector3 Position { get { return transform.position; } }
+        #endregion
+
+        #region - Methods -
+
+        /// <summary>
+        /// Восстанавливает параметры по умолчанию
+        /// </summary>
+        public void RestoreDefaultProperties()
+        {
+            Tension = DefaultTensionValue;
+
+            Bias = DefauleBiasValue;
+
+            Continuity = DefaultContinuityValue;
+        }
+
+        #endregion
     }
 }
