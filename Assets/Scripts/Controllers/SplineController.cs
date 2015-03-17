@@ -71,5 +71,18 @@ namespace Assets.Scripts.Controllers
                 SelectionManager.SelectedSpline.name = _splineNameInput.text;
             }
         }
+
+        public void OnDeletePoint()
+        {
+            var spline = SelectionManager.SelectedSpline;
+
+            var point = SelectionManager.SelectedPoint;
+
+            if (spline != null && point != null && spline.KeyPoints.Count > 3)
+            {
+                spline.KeyPoints.Remove(point);
+                Destroy(point.gameObject);
+            }
+        }
     }
 }

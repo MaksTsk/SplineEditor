@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Extensions;
+﻿using Assets.Scripts.Entities;
+using Assets.Scripts.Extensions;
 using Assets.Scripts.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
