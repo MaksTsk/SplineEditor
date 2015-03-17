@@ -15,16 +15,15 @@ namespace Assets.Scripts.Operators
         private ISplineSaver _splineSaver;
 
         private InputField _loadingSplineNameField;
+
+        private StatusBarController _statusBarController;
         private void Awake()
         {
-            _splineSaver = GetComponent<ISplineSaver>();
+            _splineSaver = this.GetComponentEx<ISplineSaver>();
 
-            if (_splineSaver == null)
-            {
-                Debug.LogError("Не удалось получить интерфейс ISplineSerializator");
-            }
+            _statusBarController = this.GetComponentEx<StatusBarController>();
 
-            _loadingSplineNameField = GameObjectExtension.GetComponentByObjectName<InputField>("LoadSplineName");
+            _loadingSplineNameField = this.GetComponentByObjectName<InputField>("LoadSplineName");
         }
 
         public void OnCreateSpline()
@@ -34,9 +33,15 @@ namespace Assets.Scripts.Operators
 
         public void OnDeleteSpline()
         {
+            if (SelectionManager.SelectedSpline == null) return;
+
+            var deletedSplineName = SelectionManager.SelectedSpline.name;
+
             DeleteSelectedSpline();
 
             SelectRemainSpline();
+
+            _statusBarController.UpdateStatus(string.Format("Spline with name \"{0}\" was succesfully deleted",deletedSplineName));
         }
 
         private void SelectRemainSpline()
@@ -53,11 +58,8 @@ namespace Assets.Scripts.Operators
 
         private void DeleteSelectedSpline()
         {
-            if (SelectionManager.SelectedSpline != null)
-            {
-                SplineHolder.Splines.Remove(SelectionManager.SelectedSpline);
-                Destroy(SelectionManager.SelectedSpline.gameObject);
-            }
+            SplineHolder.Splines.Remove(SelectionManager.SelectedSpline);
+            Destroy(SelectionManager.SelectedSpline.gameObject);
         }
 
         public void OnSaveSpline()
@@ -73,7 +75,7 @@ namespace Assets.Scripts.Operators
 
             if (string.IsNullOrEmpty(_loadingSplineNameField.text))
             {
-                StatusBarController.Status = "Please enter loading spline name";
+                _statusBarController.UpdateStatus("Please enter loading spline name");
                 return;
             }
 

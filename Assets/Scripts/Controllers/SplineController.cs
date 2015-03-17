@@ -18,13 +18,13 @@ namespace Assets.Scripts.Controllers
         // Use this for initialization
         private void Start()
         {
-            _maxCurveSlider = GameObjectExtension.GetComponentByObjectName<Slider>("MaxCurveSlider");
+            _maxCurveSlider = this.GetComponentByObjectName<Slider>("MaxCurveSlider");
 
-            _isClosedSplineToggle = GameObjectExtension.GetComponentByObjectName<Toggle>("IsCloseSplineToggle");
+            _isClosedSplineToggle = this.GetComponentByObjectName<Toggle>("IsCloseSplineToggle");
 
-            _showSourceLineToggle = GameObjectExtension.GetComponentByObjectName<Toggle>("ShowSourceLineToggle");
+            _showSourceLineToggle = this.GetComponentByObjectName<Toggle>("ShowSourceLineToggle");
 
-            _splineNameInput = GameObjectExtension.GetComponentByObjectName<InputField>("SplineNameInput");
+            _splineNameInput = this.GetComponentByObjectName<InputField>("SplineNameInput");
         }
 
 

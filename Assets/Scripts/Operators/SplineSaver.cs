@@ -2,6 +2,7 @@
 using System.IO;
 using Assets.Scripts.Controllers;
 using Assets.Scripts.Entities;
+using Assets.Scripts.Extensions;
 using Assets.Scripts.Interfaces;
 using UnityEngine;
 
@@ -17,9 +18,13 @@ namespace Assets.Scripts.Operators
 
         private string _saveFolderPath;
 
+        private StatusBarController _statusBarController;
+
         private void Awake()
         {
             InitSavePath();
+
+            _statusBarController = this.GetComponentEx<StatusBarController>();
         }
 
         private void InitSavePath()
@@ -36,11 +41,18 @@ namespace Assets.Scripts.Operators
         {
             var fileName = GetSaveFileName(spline.name);
 
-            if (String.IsNullOrEmpty(fileName)) return;
+            if (String.IsNullOrEmpty(fileName))
+            {
+                _statusBarController.UpdateStatus("Can't save spline with empty name");
+                
+                return;
+            }
 
             var serializedSpline = new SerializableSpline(SelectionManager.SelectedSpline);
 
             SplineXmlSerializer.SerializeSpline(serializedSpline,fileName);
+
+            _statusBarController.UpdateStatus("Spline was succesfully saved");
         }
 
         public void LoadSpline(string splineName)
@@ -49,13 +61,23 @@ namespace Assets.Scripts.Operators
 
             if (!File.Exists(fileName))
             {
-                StatusBarController.Status = string.Format("Cant find spline with name \"{0}\"", splineName);
+                _statusBarController.UpdateStatus(string.Format("Can't find spline with name \"{0}\"", splineName));
+
                 return;
             }
             
             var loadedSpline = SplineXmlSerializer.DeSerializeSpline(fileName);
 
+            if (loadedSpline == null)
+            {
+                _statusBarController.UpdateStatus(string.Format("Can't load file for spline \"{0}\"", splineName));
+
+                return;
+            }
+
             RestoreDeserializedSpline(loadedSpline);
+
+            _statusBarController.UpdateStatus(string.Format("Spline \"{0}\" was succesfully loaded", splineName));
         }
 
         private string GetSaveFileName(string splineName)
@@ -75,10 +97,6 @@ namespace Assets.Scripts.Operators
             var spline = splineObj.GetComponent<Spline>();
 
             serializableSpline.RestoreSplineProperties(spline);
-
-            Debug.Log(string.Format("Prefab points count: {0}, ", spline.KeyPoints.Count));
-
-            Debug.Log(string.Format("Serialized points count: {0}, ", spline.KeyPoints.Count));
 
             for (var i = 0; i < serializableSpline.KeyPoints.Count; i++)
             {
@@ -101,13 +119,7 @@ namespace Assets.Scripts.Operators
                     spline.KeyPoints.Add(point);
                 }
 
-                Debug.Log(string.Format("Before restoring location: x={0}, y={1}, z={2}", point.Position.x,
-                    point.Position.y, point.Position.x));
-
                 serPoint.RestorePoint(point);
-
-                Debug.Log(string.Format("After restoring location: x={0}, y={1}, z={2}", point.Position.x,
-                    point.Position.y, point.Position.x));
             }
         }
     }

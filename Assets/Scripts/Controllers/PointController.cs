@@ -17,11 +17,11 @@ namespace Assets.Scripts.Controllers
         // Use this for initialization
         private void Start()
         {
-            _tensionSlider = GameObjectExtension.GetComponentByObjectName<Slider>("TensionSlider");
+            _tensionSlider = this.GetComponentByObjectName<Slider>("TensionSlider");
 
-            _biasSlider = GameObjectExtension.GetComponentByObjectName<Slider>("BiasSlider");
+            _biasSlider = this.GetComponentByObjectName<Slider>("BiasSlider");
 
-            _continuitySlider = GameObjectExtension.GetComponentByObjectName<Slider>("ContinuitySlider");
+            _continuitySlider = this.GetComponentByObjectName<Slider>("ContinuitySlider");
         }
 
         // Update is called once per frame

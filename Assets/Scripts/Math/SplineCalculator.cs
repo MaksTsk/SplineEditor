@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts.Controllers;
 using Assets.Scripts.Entities;
-using Assets.Scripts.Operators;
+using Assets.Scripts.Extensions;
 using UnityEngine;
 
 namespace Assets.Scripts.Math
@@ -14,12 +14,7 @@ namespace Assets.Scripts.Math
 
         private void Awake()
         {
-            _spline = GetComponent<Spline>();
-
-            if (_spline == null)
-            {
-                Debug.LogError("Не установлен Spline для SplineCalculator");
-            }
+            _spline = this.GetComponentEx<Spline>();
         }
 
         public List<Vector3> GetSplinePoints()

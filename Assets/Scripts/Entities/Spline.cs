@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.Extensions;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Math;
 using Assets.Scripts.Operators;
@@ -24,7 +25,7 @@ namespace Assets.Scripts.Entities
 
         private void Awake()
         {
-            _splineCalculator = GetComponent<SplineCalculator>();
+            _splineCalculator = this.GetComponentEx<SplineCalculator>();
         }
 
         // Use this for initialization

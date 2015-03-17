@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Behaviours;
+using Assets.Scripts.Extensions;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Operators;
 using UnityEngine;
@@ -33,7 +34,7 @@ namespace Assets.Scripts.Entities
 
         private void Awake()
         {
-            _selectMaterials = GetComponent<SelectMaterials>();
+            _selectMaterials = this.GetComponentEx<SelectMaterials>();
 
             if (_selectMaterials == null)
             {

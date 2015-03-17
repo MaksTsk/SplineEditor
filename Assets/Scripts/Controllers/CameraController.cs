@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Extensions;
+using UnityEngine;
 
 namespace Assets.Scripts.Controllers
 {
@@ -8,7 +9,7 @@ namespace Assets.Scripts.Controllers
         // Use this for initialization
         private void Awake()
         {
-            MainCamera = GetComponent<Camera>();
+            MainCamera = this.GetComponentEx<Camera>();
         }
 
         // Update is called once per frame
