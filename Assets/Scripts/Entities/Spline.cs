@@ -10,11 +10,11 @@ namespace Assets.Scripts.Entities
     {
         public List<Point> KeyPoints;
 
-        public bool IsClosedSpline;
+        public bool IsClosedSpline = true;
 
-        public int MaxVerticesCurve =10;
+        public int MaxVerticesCurve = 50;
 
-        public bool DrawSourceLine;
+        public bool DrawSourceLine = true;
 
         public List<Vector3> SplinePoints { get; private set; }
 
@@ -57,6 +57,8 @@ namespace Assets.Scripts.Entities
         }
 
         public bool IsSelected { get { return ReferenceEquals(Selector.SelectedSpline, this); } }
+
+        public string Title { get; set; }
 
     }
 }

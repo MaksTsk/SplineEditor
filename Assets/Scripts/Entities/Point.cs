@@ -46,8 +46,6 @@ namespace Assets.Scripts.Entities
 
         public void Select()
         {
-            Debug.Log("Point Select");
-
             var parentObject = GetComponentInParent<Spline>();
 
             if (parentObject != null)
