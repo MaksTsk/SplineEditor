@@ -1,34 +1,32 @@
-﻿using System.IO;
-using Assets.Scripts.Entities;
+﻿using Assets.Scripts.Extensions;
 using Assets.Scripts.Interfaces;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Operators
 {
     public class SplineManager : MonoBehaviour
     {
-        private const string SplineFileNameExtension = "spl";
-
         public GameObject SplineObject;
 
-        public GameObject PointPrefab;
+        private ISplineSaver _splineSaver;
 
-        private ISplineSerializator _splineSerializator;
-
+        private InputField _splineNameField;
         private void Awake()
         {
-            _splineSerializator = GetComponent<ISplineSerializator>();
+            _splineSaver = GetComponent<ISplineSaver>();
 
-            if (_splineSerializator == null)
+            if (_splineSaver == null)
             {
                 Debug.LogError("Не удалось получить интерфейс ISplineSerializator");
             }
+
+            _splineNameField = GameObjectExtension.GetComponentByObjectName<InputField>("SplineNameInput");
         }
 
         public void OnCreateSpline()
         {
-            Instantiate(SplineObject, new Vector3(0, 0, 0), Quaternion.identity);
+            Instantiate(SplineObject);
         }
 
         public void OnDeleteSpline()
@@ -63,74 +61,16 @@ namespace Assets.Scripts.Operators
         {
             if (SelectionManager.SelectedSpline == null) return;
 
-            var fileName = GetSaveFileName();
-
-            if (string.IsNullOrEmpty(fileName)) return;
-
-            var serializedSpline = new SerializableSpline(SelectionManager.SelectedSpline);
-
-            _splineSerializator.SerializeSpline(serializedSpline, fileName);
-        }
-
-        private string GetSaveFileName()
-        {
-            return EditorUtility.SaveFilePanel(
-                "Save Spline", 
-                string.Empty,
-                string.Concat(SelectionManager.SelectedSpline.name,".",SplineFileNameExtension), 
-                SplineFileNameExtension);
+            _splineSaver.SaveSpline(SelectionManager.SelectedSpline);
         }
 
         public void OnLoadSpline()
         {
-            var fileName = GetLoadFileName();
+            if (SelectionManager.SelectedSpline == null) return;
 
-            if (string.IsNullOrEmpty(fileName) || !File.Exists(fileName)) return;
+            var loadingSplineName = _splineNameField.text;
 
-            var loadedSpline = _splineSerializator.DeSerializeSpline(fileName);
-
-            RestoreDeserializedSpline(loadedSpline);
-        }
-
-        private void RestoreDeserializedSpline(SerializableSpline serializableSpline)
-        {
-            var splineObj = Instantiate(SplineObject);
-
-            var spline = splineObj.GetComponent<Spline>();
-
-            serializableSpline.RestoreSplineProperties(spline);
-
-            for (var i = 0; i < serializableSpline.KeyPoints.Count; i++)
-            {
-                var serPoint = serializableSpline.KeyPoints[i];
-
-                Point point;
-
-                if (i < Spline.DefaultPointsCount)
-                {
-                    point = spline.KeyPoints[i];
-                }
-                else
-                {
-                    var pointObj = Instantiate(PointPrefab);
-
-                    point = pointObj.GetComponent<Point>();
-
-                    point.transform.parent = spline.transform;
-
-                    spline.KeyPoints.Add(point);
-                }
-
-                serPoint.RestorePoint(point);
-            }
-        }
-
-        private string GetLoadFileName()
-        {
-            return EditorUtility.OpenFilePanel(
-                "Load Spline",
-                string.Empty,
-                SplineFileNameExtension);
+            _splineSaver.LoadSpline(loadingSplineName);
         }
     }
 }

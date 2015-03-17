@@ -1005,7 +1005,7 @@ GameObject:
   - 114: {fileID: 557621495}
   - 114: {fileID: 557621494}
   m_Layer: 5
-  m_Name: InputTitle
+  m_Name: SplineNameInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1083,7 +1083,19 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   m_OnValueChange:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1148908528}
+        m_MethodName: OnSplineNameChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.InputField+OnChangeEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_SelectionColor: {r: .65882355, g: .807843149, b: 1, a: .752941191}
@@ -1169,7 +1181,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SplineObject: {fileID: 133748, guid: c1f95677b52e3634086eafc29414384c, type: 2}
-  PointPrefab: {fileID: 0}
 --- !u!114 &592869153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1216,9 +1227,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 592869150}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1f697ff7bc751a4fa07aa0d7285fe67, type: 3}
+  m_Script: {fileID: 11500000, guid: 05b9cace2d5660348836768470aba04c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PointPrefab: {fileID: 107936, guid: 43f0e9293b7dad341aec537dd47581f9, type: 2}
+  SplinePrefab: {fileID: 133748, guid: c1f95677b52e3634086eafc29414384c, type: 2}
 --- !u!1001 &649755821
 Prefab:
   m_ObjectHideFlags: 0
@@ -2888,7 +2901,7 @@ GameObject:
   - 222: {fileID: 1761764169}
   - 114: {fileID: 1761764168}
   m_Layer: 5
-  m_Name: Text
+  m_Name: SplineNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

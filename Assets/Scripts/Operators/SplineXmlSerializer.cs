@@ -2,14 +2,13 @@
 using System.IO;
 using System.Xml.Serialization;
 using Assets.Scripts.Entities;
-using Assets.Scripts.Interfaces;
 using UnityEngine;
 
 namespace Assets.Scripts.Operators
 {
-    public class SplineSerializator : MonoBehaviour, ISplineSerializator
+    public static class SplineXmlSerializer
     {
-        public void SerializeSpline(SerializableSpline spline, string fileName)
+        public static void SerializeSpline(SerializableSpline spline, string fileName)
         {
             using (var stream = File.Open(fileName, FileMode.Create, FileAccess.Write))
             {
@@ -25,7 +24,7 @@ namespace Assets.Scripts.Operators
             }
         }
 
-        public SerializableSpline DeSerializeSpline(string fileName)
+        public static SerializableSpline DeSerializeSpline(string fileName)
         {
             if (File.Exists(fileName))
             {

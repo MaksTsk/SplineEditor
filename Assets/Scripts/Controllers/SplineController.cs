@@ -13,6 +13,8 @@ namespace Assets.Scripts.Controllers
 
         private Toggle _showSourceLineToggle;
 
+        private InputField _splineNameInput;
+
         // Use this for initialization
         private void Start()
         {
@@ -21,6 +23,8 @@ namespace Assets.Scripts.Controllers
             _isClosedSplineToggle = GameObjectExtension.GetComponentByObjectName<Toggle>("IsCloseSplineToggle");
 
             _showSourceLineToggle = GameObjectExtension.GetComponentByObjectName<Toggle>("ShowSourceLineToggle");
+
+            _splineNameInput = GameObjectExtension.GetComponentByObjectName<InputField>("SplineNameInput");
         }
 
 
@@ -32,6 +36,7 @@ namespace Assets.Scripts.Controllers
                 _maxCurveSlider.value = SelectionManager.SelectedSpline.MaxVerticesCurve;
                 _isClosedSplineToggle.isOn = SelectionManager.SelectedSpline.IsClosedSpline;
                 _showSourceLineToggle.isOn = SelectionManager.SelectedSpline.DrawSourceLine;
+                _splineNameInput.text = SelectionManager.SelectedSpline.name;
             }
         }
 
@@ -56,6 +61,14 @@ namespace Assets.Scripts.Controllers
             if (SelectionManager.SelectedSpline != null)
             {
                 SelectionManager.SelectedSpline.DrawSourceLine = _showSourceLineToggle.isOn;
+            }
+        }
+
+        public void OnSplineNameChanged()
+        {
+            if (SelectionManager.SelectedSpline != null)
+            {
+                SelectionManager.SelectedSpline.name = _splineNameInput.text;
             }
         }
     }
