@@ -9,15 +9,28 @@ namespace Assets.Scripts.Math
 {
     public  class SplineCalculator : MonoBehaviour, ISplineCalculator
     {
+        #region - Fields -
+
         public Point PointPrefab;
 
         private Spline _spline;
+
+        #endregion
+
+        #region - Event handlers -
 
         private void Awake()
         {
             _spline = this.GetComponentEx<Spline>();
         }
 
+        #endregion
+
+        #region - ISplineCalculator Members -
+
+        /// <summary>
+        /// Получает список интерполированных точек сплайна
+        /// </summary>
         public List<Vector3> GetSplinePoints()
         {
             var listCapacity = (int) System.Math.Pow(_spline.KeyPoints.Count, 2);
@@ -53,21 +66,21 @@ namespace Assets.Scripts.Math
                 var continuity = _spline.KeyPoints[i].Continuity;
                 var bias = _spline.KeyPoints[i].Bias;
 
-                var r1 = 0.5f * (1 - tension) *
-                         ((1 + bias) * (1 - continuity) * (_spline.KeyPoints[i].Position - point1.Position) +
-                          (1 - bias) * (1 + continuity) * (point2.Position - _spline.KeyPoints[i].Position));
+                var r1 = 0.5f*(1 - tension)*
+                         ((1 + bias)*(1 - continuity)*(_spline.KeyPoints[i].Position - point1.Position) +
+                          (1 - bias)*(1 + continuity)*(point2.Position - _spline.KeyPoints[i].Position));
 
                 tension = point2.Tension;
                 continuity = point2.Continuity;
                 bias = point2.Bias;
 
-                var r2 = 0.5f * (1 - tension) *
-                             ((1 + bias) * (1 + continuity) * (point2.Position - _spline.KeyPoints[i].Position) +
-                              (1 - bias) * (1 - continuity) * (point3.Position - point2.Position));
+                var r2 = 0.5f*(1 - tension)*
+                         ((1 + bias)*(1 + continuity)*(point2.Position - _spline.KeyPoints[i].Position) +
+                          (1 - bias)*(1 - continuity)*(point3.Position - point2.Position));
 
                 for (var k = 0; k < _spline.MaxVerticesCurve; k++)
                 {
-                    var t = (float)k / (float)(_spline.MaxVerticesCurve - 1);
+                    var t = (float) k/(float) (_spline.MaxVerticesCurve - 1);
                     var v = Interpolate(t, _spline.KeyPoints[i].Position, point2.Position, r1, r2);
                     splinePoints.Add(v);
                 }
@@ -76,12 +89,18 @@ namespace Assets.Scripts.Math
             return splinePoints;
         }
 
+        /// <summary>
+        /// Интерполирует по заданным параметрам
+        /// </summary>
         private Vector3 Interpolate(float t, Vector3 p1, Vector3 p2, Vector3 r1, Vector3 r2)
         {
             return p1 * (2.0f * t * t * t - 3.0f * t * t + 1.0f) + r1 * (t * t * t - 2.0f * t * t + t) +
-                p2 * (-2.0f * t * t * t + 3.0f * t * t) + r2 * (t * t * t - t * t);
+                   p2 * (-2.0f * t * t * t + 3.0f * t * t) + r2 * (t * t * t - t * t);
         }
 
+        /// <summary>
+        /// Получает координаты новой точки в зависимости от места клика
+        /// </summary>
         public Vector3 GetPointLocationFromClick()
         {
             var mouseLocation = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
@@ -113,7 +132,8 @@ namespace Assets.Scripts.Math
             {
                 var A = CameraController.MainCamera.WorldToScreenPoint(_spline.KeyPoints[0].Position);
                 var B =
-                    CameraController.MainCamera.WorldToScreenPoint(_spline.KeyPoints[_spline.KeyPoints.Count - 1].Position);
+                    CameraController.MainCamera.WorldToScreenPoint(
+                        _spline.KeyPoints[_spline.KeyPoints.Count - 1].Position);
 
                 var D = A + Vector3.Project(mouseLocation - A, B - A);
                 var Va = D - A;
@@ -137,5 +157,7 @@ namespace Assets.Scripts.Math
 
             return minD;
         }
+
+        #endregion
     }
 }

@@ -12,12 +12,6 @@ namespace Assets.Scripts.Controllers
             MainCamera = this.GetComponentEx<Camera>();
         }
 
-        // Update is called once per frame
-        private void Update()
-        {
-
-        }
-
         public static Camera MainCamera { get; private set; }
     }
 }

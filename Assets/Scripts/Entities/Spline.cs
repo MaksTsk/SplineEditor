@@ -2,16 +2,26 @@
 using Assets.Scripts.Controllers;
 using Assets.Scripts.Extensions;
 using Assets.Scripts.Interfaces;
-using Assets.Scripts.Math;
-using Assets.Scripts.Operators;
 using UnityEngine;
 
 namespace Assets.Scripts.Entities
 {
     public class Spline : MonoBehaviour, ISelectableObject
     {
-        public const int DefaultPointsCount = 3;
+        #region - Constants -
 
+        /// <summary>
+        /// Минимальное количество точек спланйа
+        /// </summary>
+        public const int MinSplinePoints = 3;
+
+        #endregion
+
+        #region - Fields -
+
+        /// <summary>
+        /// Коллекция исходных точек сплайна
+        /// </summary>
         public List<Point> KeyPoints;
 
         public bool IsClosedSpline = true;
@@ -19,11 +29,13 @@ namespace Assets.Scripts.Entities
         public int MaxVerticesCurve = 50;
 
         public bool DrawSourceLine = true;
-
         public GameObject PointPrefab;
-        public List<Vector3> SplinePoints { get; private set; }
 
         private ISplineCalculator _splineCalculator;
+
+        #endregion
+
+        #region - Event Handlers -
 
         private void Awake()
         {
@@ -42,15 +54,6 @@ namespace Assets.Scripts.Entities
             SplinePoints = new List<Vector3>();
         }
 
-        public void SelectFirstKeyPoint()
-        {
-            if (KeyPoints.Count > 0)
-            {
-                SelectionManager.SelectedPoint = KeyPoints[0];
-            }
-        }
-
-        // Update is called once per frame
         private void Update()
         {
             SplinePoints = _splineCalculator.GetSplinePoints();
@@ -66,6 +69,34 @@ namespace Assets.Scripts.Entities
             }
         }
 
+        #endregion
+
+        #region - Properties -
+
+        /// <summary>
+        /// Коллекция интерполированных точек.
+        /// </summary>
+        public List<Vector3> SplinePoints { get; private set; }
+
+        #endregion
+
+        #region - Methods -
+
+        /// <summary>
+        /// Выделяет первую точку сплайна.
+        /// </summary>
+        public void SelectFirstKeyPoint()
+        {
+            if (KeyPoints.Count > 0)
+            {
+                SelectionManager.SelectedPoint = KeyPoints[0];
+            }
+        }
+
+        /// <summary>
+        /// Создаёт точку в заданной локации
+        /// </summary>
+        /// <param name="pointLocation">локация для создания точки</param>
         private void CreatePointByLocation(Vector3 pointLocation)
         {
             var point = Instantiate(PointPrefab);
@@ -75,12 +106,26 @@ namespace Assets.Scripts.Entities
             KeyPoints.Add(point.GetComponent<Point>());
         }
 
+        #endregion
+
+        #region - ISelectable Object Members -
+
+        /// <summary>
+        /// Выделяет компонент
+        /// </summary>
         public void Select()
         {
             SelectionManager.SelectedSpline = this;
         }
 
-        public bool IsSelected { get { return ReferenceEquals(SelectionManager.SelectedSpline, this); } }
+        /// <summary>
+        /// Является ли компонент выделенным.
+        /// </summary>
+        public bool IsSelected
+        {
+            get { return ReferenceEquals(SelectionManager.SelectedSpline, this); }
+        }
 
+        #endregion
     }
 }

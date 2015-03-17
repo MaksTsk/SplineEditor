@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Behaviours;
+using Assets.Scripts.Controllers;
 using Assets.Scripts.Extensions;
 using Assets.Scripts.Interfaces;
-using Assets.Scripts.Operators;
 using UnityEngine;
 
 namespace Assets.Scripts.Entities
@@ -66,11 +66,17 @@ namespace Assets.Scripts.Entities
 
         #region - ISelectable Object Members -
 
+        /// <summary>
+        /// Является ли компонент выделенным.
+        /// </summary>
         public bool IsSelected
         {
             get { return ReferenceEquals(SelectionManager.SelectedPoint, this); }
         }
 
+        /// <summary>
+        /// Выделяет компонент
+        /// </summary>
         public void Select()
         {
             var parentObject = GetComponentInParent<Spline>();
@@ -87,6 +93,9 @@ namespace Assets.Scripts.Entities
 
         #region - Properties -
 
+        /// <summary>
+        /// Позиция
+        /// </summary>
         public Vector3 Position
         {
             get { return transform.position; }

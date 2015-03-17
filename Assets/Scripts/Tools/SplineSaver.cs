@@ -6,10 +6,12 @@ using Assets.Scripts.Extensions;
 using Assets.Scripts.Interfaces;
 using UnityEngine;
 
-namespace Assets.Scripts.Operators
+namespace Assets.Scripts.Tools
 {
     public class SplineSaver : MonoBehaviour, ISplineSaver
     {
+        #region - Fields -
+
         private const string SplineFileNameExtension = "spl";
 
         public GameObject PointPrefab;
@@ -20,6 +22,10 @@ namespace Assets.Scripts.Operators
 
         private StatusBarController _statusBarController;
 
+        #endregion
+
+        #region - Start Inicialization -
+
         private void Awake()
         {
             InitSavePath();
@@ -27,9 +33,13 @@ namespace Assets.Scripts.Operators
             _statusBarController = this.GetComponentEx<StatusBarController>();
         }
 
+        /// <summary>
+        /// Инициализирует путь к папке с сохранениями.
+        /// </summary>
         private void InitSavePath()
         {
-            _saveFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SavedSplines");
+            _saveFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                "SavedSplines");
 
             if (!Directory.Exists(_saveFolderPath))
             {
@@ -37,27 +47,39 @@ namespace Assets.Scripts.Operators
             }
         }
 
+        #endregion
+
+        #region - ISplineSaver Methods -
+
+        /// <summary>
+        /// Сохраняет спалайн
+        /// </summary>
+        /// <param name="spline">сплайн для сохранения</param>
         public void SaveSpline(Spline spline)
         {
-            var fileName = GetSaveFileName(spline.name);
+            var fileName = GetSplineFilePath(spline.name);
 
             if (String.IsNullOrEmpty(fileName))
             {
                 _statusBarController.UpdateStatus("Can't save spline with empty name");
-                
+
                 return;
             }
 
             var serializedSpline = new SerializableSpline(SelectionManager.SelectedSpline);
 
-            SplineXmlSerializer.SerializeSpline(serializedSpline,fileName);
+            SplineXmlSerializer.SerializeSpline(serializedSpline, fileName);
 
-            _statusBarController.UpdateStatus("Spline was succesfully saved");
+            _statusBarController.UpdateStatus(string.Format("Spline \"{0}\" was succesfully saved", spline.name));
         }
 
+        /// <summary>
+        /// Загружает сплайн
+        /// </summary>
+        /// <param name="splineName">имя загружаемого сплайна</param>
         public void LoadSpline(string splineName)
         {
-            var fileName = GetSaveFileName(splineName);
+            var fileName = GetSplineFilePath(splineName);
 
             if (!File.Exists(fileName))
             {
@@ -65,7 +87,7 @@ namespace Assets.Scripts.Operators
 
                 return;
             }
-            
+
             var loadedSpline = SplineXmlSerializer.DeSerializeSpline(fileName);
 
             if (loadedSpline == null)
@@ -75,22 +97,32 @@ namespace Assets.Scripts.Operators
                 return;
             }
 
-            RestoreDeserializedSpline(loadedSpline);
+            RestoreFromDeserializedSpline(loadedSpline);
 
             _statusBarController.UpdateStatus(string.Format("Spline \"{0}\" was succesfully loaded", splineName));
         }
 
-        private string GetSaveFileName(string splineName)
+        /// <summary>
+        /// Получает путь до файла сплайна
+        /// </summary>
+        /// <param name="splineName">имя сохраняемого сплайна</param>
+        private string GetSplineFilePath(string splineName)
         {
-            return Path.Combine(_saveFolderPath, GetFileNameBySplineName(splineName));
+            return Path.Combine(_saveFolderPath, GetSplineFileName(splineName));
         }
 
-        private string GetFileNameBySplineName(string splineName)
+        /// <summary>
+        /// Получает имя файла сплайна
+        /// </summary>
+        private string GetSplineFileName(string splineName)
         {
             return string.Concat(splineName, ".", SplineFileNameExtension);
         }
 
-        private void RestoreDeserializedSpline(SerializableSpline serializableSpline)
+        /// <summary>
+        /// Выстанавливает Spline из SerializableSpline
+        /// </summary>
+        private void RestoreFromDeserializedSpline(SerializableSpline serializableSpline)
         {
             var splineObj = Instantiate(SplinePrefab);
 
@@ -104,7 +136,7 @@ namespace Assets.Scripts.Operators
 
                 Point point;
 
-                if (i < Spline.DefaultPointsCount)
+                if (i < Spline.MinSplinePoints)
                 {
                     point = spline.KeyPoints[i];
                 }
@@ -122,5 +154,7 @@ namespace Assets.Scripts.Operators
                 serPoint.RestorePoint(point);
             }
         }
+
+        #endregion
     }
 }

@@ -1,9 +1,11 @@
-﻿using Assets.Scripts.Entities;
-using Assets.Scripts.Interfaces;
+﻿using Assets.Scripts.Interfaces;
 using UnityEngine;
 
 namespace Assets.Scripts.Behaviours
 {
+    /// <summary>
+    /// Позволяет объекту перемещаться с курсором мыши
+    /// </summary>
     [RequireComponent(typeof(MeshCollider))]
     public class MovableObject : MonoBehaviour {
 

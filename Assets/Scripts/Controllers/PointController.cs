@@ -1,18 +1,25 @@
 ﻿using Assets.Scripts.Extensions;
-using Assets.Scripts.Operators;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers
 {
+    /// <summary>
+    /// Компонент управления точкой.
+    /// </summary>
     public class PointController : MonoBehaviour
     {
+        #region - Fields -
+
         private Slider _tensionSlider;
 
         private Slider _biasSlider;
 
         private Slider _continuitySlider;
 
+        #endregion
+
+        #region - Event Handlers -
 
         // Use this for initialization
         private void Start()
@@ -37,6 +44,9 @@ namespace Assets.Scripts.Controllers
             }
         }
 
+        /// <summary>
+        /// Обработчик события изменения Tension
+        /// </summary>
         public void OnTensionChanged()
         {
             if (SelectionManager.SelectedPoint != null)
@@ -45,6 +55,9 @@ namespace Assets.Scripts.Controllers
             }
         }
 
+        /// <summary>
+        /// Обработчик события изменения Bias
+        /// </summary>
         public void OnBiasChanged()
         {
             if (SelectionManager.SelectedPoint != null)
@@ -53,6 +66,9 @@ namespace Assets.Scripts.Controllers
             }
         }
 
+        /// <summary>
+        /// Обработчик события изменения Continuity
+        /// </summary>
         public void OnContinuityChanged()
         {
             if (SelectionManager.SelectedPoint != null)
@@ -61,6 +77,9 @@ namespace Assets.Scripts.Controllers
             }
         }
 
+        /// <summary>
+        /// Обработчик вызова сброса параметров точки
+        /// </summary>
         public void OnResetClicked()
         {
             if (SelectionManager.SelectedPoint != null)
@@ -68,5 +87,7 @@ namespace Assets.Scripts.Controllers
                 SelectionManager.SelectedPoint.RestoreDefaultProperties();
             }
         }
+
+        #endregion
     }
 }

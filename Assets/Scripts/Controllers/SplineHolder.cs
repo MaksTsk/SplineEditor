@@ -2,12 +2,15 @@
 using Assets.Scripts.Entities;
 using UnityEngine;
 
-namespace Assets.Scripts.Operators
+namespace Assets.Scripts.Controllers
 {
     public class SplineHolder : MonoBehaviour
     {
         private static List<Spline> _splines;
 
+        /// <summary>
+        /// Коллекция сплайнов.
+        /// </summary>
         public static List<Spline> Splines
         {
             get

@@ -1,12 +1,16 @@
 ﻿using Assets.Scripts.Extensions;
-using Assets.Scripts.Operators;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers
 {
+    /// <summary>
+    /// Компонент управления сплайном
+    /// </summary>
     public class SplineController : MonoBehaviour
     {
+        #region - Fields -
+
         private Slider _maxCurveSlider;
 
         private Toggle _isClosedSplineToggle;
@@ -14,6 +18,10 @@ namespace Assets.Scripts.Controllers
         private Toggle _showSourceLineToggle;
 
         private InputField _splineNameInput;
+
+        #endregion
+
+        #region - Event Handlers -
 
         // Use this for initialization
         private void Start()
@@ -44,7 +52,7 @@ namespace Assets.Scripts.Controllers
         {
             if (SelectionManager.SelectedSpline != null)
             {
-                SelectionManager.SelectedSpline.MaxVerticesCurve = (int)_maxCurveSlider.value;
+                SelectionManager.SelectedSpline.MaxVerticesCurve = (int) _maxCurveSlider.value;
             }
         }
 
@@ -86,5 +94,7 @@ namespace Assets.Scripts.Controllers
                 spline.SelectFirstKeyPoint();
             }
         }
+
+        #endregion
     }
 }

@@ -1,15 +1,14 @@
-﻿using System;
-using Assets.Scripts.Controllers;
-using Assets.Scripts.Entities;
-using Assets.Scripts.Extensions;
+﻿using Assets.Scripts.Extensions;
 using Assets.Scripts.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Operators
+namespace Assets.Scripts.Controllers
 {
     public class SplineManager : MonoBehaviour
     {
+        #region - Fields -
+
         public GameObject SplineObject;
 
         private ISplineSaver _splineSaver;
@@ -17,6 +16,11 @@ namespace Assets.Scripts.Operators
         private InputField _loadingSplineNameField;
 
         private StatusBarController _statusBarController;
+
+        #endregion
+
+        #region - Start Inicialization -
+
         private void Awake()
         {
             _splineSaver = this.GetComponentEx<ISplineSaver>();
@@ -26,42 +30,57 @@ namespace Assets.Scripts.Operators
             _loadingSplineNameField = this.GetComponentByObjectName<InputField>("LoadSplineName");
         }
 
+        #endregion
+
+        #region - Event Handlers -
+
+        /// <summary>
+        /// Обработчик команды создания сплайна
+        /// </summary>
         public void OnCreateSpline()
         {
             Instantiate(SplineObject);
         }
 
+        /// <summary>
+        /// Обработчик команды удаления сплайна
+        /// </summary>
         public void OnDeleteSpline()
         {
             if (SelectionManager.SelectedSpline == null) return;
 
-            var deletedSplineName = SelectionManager.SelectedSpline.name;
-
             DeleteSelectedSpline();
 
-            SelectRemainSpline();
-
-            _statusBarController.UpdateStatus(string.Format("Spline with name \"{0}\" was succesfully deleted",deletedSplineName));
+            SelectLastSpline();
         }
 
-        private void SelectRemainSpline()
+        /// <summary>
+        /// Выделяет последний созданный сплайн
+        /// </summary>
+        private void SelectLastSpline()
         {
             if (SplineHolder.Splines.Count > 0)
             {
-                var firstSpline = SplineHolder.Splines[0];
+                var lastSpline = SplineHolder.Splines[SplineHolder.Splines.Count - 1];
 
-                SelectionManager.SelectedSpline = firstSpline;
+                SelectionManager.SelectedSpline = lastSpline;
 
-                firstSpline.SelectFirstKeyPoint();
+                lastSpline.SelectFirstKeyPoint();
             }
         }
 
+        /// <summary>
+        /// Удаляет выделенный сплайн
+        /// </summary>
         private void DeleteSelectedSpline()
         {
             SplineHolder.Splines.Remove(SelectionManager.SelectedSpline);
             Destroy(SelectionManager.SelectedSpline.gameObject);
         }
 
+        /// <summary>
+        /// Обработчик команды сохранения сплайна
+        /// </summary>
         public void OnSaveSpline()
         {
             if (SelectionManager.SelectedSpline == null) return;
@@ -69,10 +88,11 @@ namespace Assets.Scripts.Operators
             _splineSaver.SaveSpline(SelectionManager.SelectedSpline);
         }
 
+        /// <summary>
+        /// Обработчик команды загрузки сплайна
+        /// </summary>
         public void OnLoadSpline()
         {
-            if (SelectionManager.SelectedSpline == null) return;
-
             if (string.IsNullOrEmpty(_loadingSplineNameField.text))
             {
                 _statusBarController.UpdateStatus("Please enter loading spline name");
@@ -81,5 +101,7 @@ namespace Assets.Scripts.Operators
 
             _splineSaver.LoadSpline(_loadingSplineNameField.text);
         }
+
+        #endregion
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using Assets.Scripts.Extensions;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers
@@ -8,8 +6,6 @@ namespace Assets.Scripts.Controllers
     public class StatusBarController : MonoBehaviour
     {
         public Text StatusInput;
-
-        private Timer _timer;
 
         // Use this for initialization
         private void Start()
@@ -23,10 +19,18 @@ namespace Assets.Scripts.Controllers
             StatusInput.text = Status;
         }
 
+        /// <summary>
+        /// Статус
+        /// </summary>
+        private string Status { get; set; }
+
+        /// <summary>
+        /// Обновляет статус бар
+        /// </summary>
+        /// <param name="status">статус</param>
         public void UpdateStatus(string status)
         {
             Status = status;
         }
-        private string Status { get; set; }
     }
 }

@@ -4,10 +4,15 @@ using System.Xml.Serialization;
 using Assets.Scripts.Entities;
 using UnityEngine;
 
-namespace Assets.Scripts.Operators
+namespace Assets.Scripts.Tools
 {
     public static class SplineXmlSerializer
     {
+        /// <summary>
+        /// Сереализует сплайн в xml-файл
+        /// </summary>
+        /// <param name="spline">сплайн для серилазации</param>
+        /// <param name="fileName">имя файла</param>
         public static void SerializeSpline(SerializableSpline spline, string fileName)
         {
             using (var stream = File.Open(fileName, FileMode.Create, FileAccess.Write))
@@ -24,6 +29,11 @@ namespace Assets.Scripts.Operators
             }
         }
 
+        /// <summary>
+        /// Десериализует сплайн из файла
+        /// </summary>
+        /// <param name="fileName">имя файла</param>
+        /// <returns>десериализованный сплайн</returns>
         public static SerializableSpline DeSerializeSpline(string fileName)
         {
             if (File.Exists(fileName))
