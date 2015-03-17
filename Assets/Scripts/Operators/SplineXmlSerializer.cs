@@ -28,7 +28,7 @@ namespace Assets.Scripts.Operators
         {
             if (File.Exists(fileName))
             {
-                using (var filestream = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read))
+                using (var filestream = File.Open(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read))
                 {
                     try
                     {

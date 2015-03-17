@@ -1,4 +1,6 @@
-﻿using Assets.Scripts.Entities;
+﻿using System;
+using Assets.Scripts.Controllers;
+using Assets.Scripts.Entities;
 using Assets.Scripts.Extensions;
 using Assets.Scripts.Interfaces;
 using UnityEngine;
@@ -12,7 +14,7 @@ namespace Assets.Scripts.Operators
 
         private ISplineSaver _splineSaver;
 
-        private InputField _splineNameField;
+        private InputField _loadingSplineNameField;
         private void Awake()
         {
             _splineSaver = GetComponent<ISplineSaver>();
@@ -22,7 +24,7 @@ namespace Assets.Scripts.Operators
                 Debug.LogError("Не удалось получить интерфейс ISplineSerializator");
             }
 
-            _splineNameField = GameObjectExtension.GetComponentByObjectName<InputField>("SplineNameInput");
+            _loadingSplineNameField = GameObjectExtension.GetComponentByObjectName<InputField>("LoadSplineName");
         }
 
         public void OnCreateSpline()
@@ -69,9 +71,13 @@ namespace Assets.Scripts.Operators
         {
             if (SelectionManager.SelectedSpline == null) return;
 
-            var loadingSplineName = _splineNameField.text;
+            if (string.IsNullOrEmpty(_loadingSplineNameField.text))
+            {
+                StatusBarController.Status = "Please enter loading spline name";
+                return;
+            }
 
-            _splineSaver.LoadSpline(loadingSplineName);
+            _splineSaver.LoadSpline(_loadingSplineNameField.text);
         }
     }
 }

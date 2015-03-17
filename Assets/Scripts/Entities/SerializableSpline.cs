@@ -9,7 +9,7 @@ namespace Assets.Scripts.Entities
         /// </summary>
         public SerializableSpline()
         {
-            
+            KeyPoints = new List<SerializablePoint>();
         }
 
         public SerializableSpline(Spline spline)
@@ -55,8 +55,6 @@ namespace Assets.Scripts.Entities
             spline.IsClosedSpline = IsClosedSpline;
             spline.DrawSourceLine = DrawSourceLine;
             spline.MaxVerticesCurve = MaxVerticesCurve;
-
-            KeyPoints = new List<SerializablePoint>();
         }
 
 

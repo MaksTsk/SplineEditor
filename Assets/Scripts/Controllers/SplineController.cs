@@ -82,6 +82,8 @@ namespace Assets.Scripts.Controllers
             {
                 spline.KeyPoints.Remove(point);
                 Destroy(point.gameObject);
+
+                spline.SelectFirstKeyPoint();
             }
         }
     }

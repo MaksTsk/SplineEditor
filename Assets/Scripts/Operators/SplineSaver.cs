@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Assets.Scripts.Controllers;
 using Assets.Scripts.Entities;
 using Assets.Scripts.Interfaces;
 using UnityEngine;
@@ -18,7 +19,17 @@ namespace Assets.Scripts.Operators
 
         private void Awake()
         {
-            _saveFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            InitSavePath();
+        }
+
+        private void InitSavePath()
+        {
+            _saveFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SavedSplines");
+
+            if (!Directory.Exists(_saveFolderPath))
+            {
+                Directory.CreateDirectory(_saveFolderPath);
+            }
         }
 
         public void SaveSpline(Spline spline)
@@ -36,8 +47,12 @@ namespace Assets.Scripts.Operators
         {
             var fileName = GetSaveFileName(splineName);
 
-            if (String.IsNullOrEmpty(fileName) || !File.Exists(fileName)) return;
-
+            if (!File.Exists(fileName))
+            {
+                StatusBarController.Status = string.Format("Cant find spline with name \"{0}\"", splineName);
+                return;
+            }
+            
             var loadedSpline = SplineXmlSerializer.DeSerializeSpline(fileName);
 
             RestoreDeserializedSpline(loadedSpline);
@@ -61,6 +76,10 @@ namespace Assets.Scripts.Operators
 
             serializableSpline.RestoreSplineProperties(spline);
 
+            Debug.Log(string.Format("Prefab points count: {0}, ", spline.KeyPoints.Count));
+
+            Debug.Log(string.Format("Serialized points count: {0}, ", spline.KeyPoints.Count));
+
             for (var i = 0; i < serializableSpline.KeyPoints.Count; i++)
             {
                 var serPoint = serializableSpline.KeyPoints[i];
@@ -82,7 +101,13 @@ namespace Assets.Scripts.Operators
                     spline.KeyPoints.Add(point);
                 }
 
+                Debug.Log(string.Format("Before restoring location: x={0}, y={1}, z={2}", point.Position.x,
+                    point.Position.y, point.Position.x));
+
                 serPoint.RestorePoint(point);
+
+                Debug.Log(string.Format("After restoring location: x={0}, y={1}, z={2}", point.Position.x,
+                    point.Position.y, point.Position.x));
             }
         }
     }
