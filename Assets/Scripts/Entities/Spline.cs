@@ -29,6 +29,12 @@ namespace Assets.Scripts.Entities
         private void Start()
         {
             Selector.SelectedSpline = this;
+
+            if (KeyPoints.Count > 0)
+            {
+                Selector.SelectedPoint = KeyPoints[0];
+            }
+
             SplineHolder.Splines.Add(this);
 
             SplinePoints = new List<Vector3>();
